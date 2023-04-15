@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfHello.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfHello"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="655" Width="800"
+         SizeToContent="WidthAndHeight"
+       >
+    <Grid>
+        <Label Content="Hello, WPF!" HorizontalAlignment="Left" Margin="32,28,0,0" VerticalAlignment="Top" Height="66" Width="380" FontSize="48" FontWeight="Bold"/>
+        <Button Content="Button" Height="56" Width="180"  Click="btnHello_click" Margin="60,238,560,345"/>
+        <Label x:Name="lbl_name" Content="Име" Margin="32,142,712,463"/>
+        <TextBox x:Name="txtbx_name" TextWrapping="Wrap" Height="25" Width="180" Margin="132,147,488,467"/>
+        <GroupBox Width="380" Height ="100" Margin="20,110,400,429" />
+        <ListBox x:Name="listBox" Margin="601,130,83,358" IsSynchronizedWithCurrentItem="True">
+            <ListBoxItem Content="Mike"/>
+            <ListBoxItem Content="Lisa"/>
+            <ListBoxItem Content="John"/>
+            <ListBoxItem Content="Mary"/>
+        </ListBox>
+
+    </Grid>
+</Window>
