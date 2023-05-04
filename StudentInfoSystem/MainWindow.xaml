@@ -26,7 +26,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <GroupBox Header="Снимка" Height="250" Width="250" Grid.Row="0">
-                    <Image Name="img" Margin="30,0"></Image>
+                    <Image Name="img" Margin= "30,0"></Image>
                 </GroupBox>
 
                 <Grid Grid.Row="1" Margin="0, 0, 10, 0">

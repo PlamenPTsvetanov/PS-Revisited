@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -15,26 +17,26 @@ using System.Windows.Shapes;
 
 namespace ExpenseIt
 {
-    /// <summary>
-    /// Interaction logic for ExpenseItHome.xaml
-    /// </summary>
-    public partial class ExpenseItHome : Window
+    public partial class ExpenseItHome : Window, INotifyPropertyChanged
     {
-        public DateTime LastChecked { get; set; }
+        public ObservableCollection<string> PersonsChecked { get; set; }
+        public DateTime LastChecked { 
+            get;
+            set; 
+        }
         public List<Person> ExpenseDataSource { get; set; }
         public string MainCaptionText { get; set; }
         public ExpenseItHome()
         {
             InitializeComponent();
             MainCaptionText = "View Expense Report :";
-            
+            PersonsChecked = new ObservableCollection<string>();   
             LastChecked = DateTime.Now;
             ExpenseDataSource = new List<Person>()
             {
                 new Person()
                 {
                     Name="Mike",
-                    Department ="Legal",
                     Expenses = new List<Expense>()
                         {
                             new Expense() { ExpenseType="Lunch", ExpenseAmount =50 },
@@ -102,12 +104,24 @@ namespace ExpenseIt
             };
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            LastChecked = DateTime.Now;
             Person person = (from ex in ExpenseDataSource where ex.Name.Equals(((Person)peopleListBox.SelectedItem).Name) select ex).First();
             ExpenseReport report = new ExpenseReport(person);
             report.Show();
+        }
+
+        private void peopleListBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            LastChecked = DateTime.Now;
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs("LastChecked"));
+            }
+            PersonsChecked.Add(((Person)peopleListBox.SelectedItem).Name);
         }
     }
 
